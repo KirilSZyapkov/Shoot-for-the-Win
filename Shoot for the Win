@@ -1,0 +1,24 @@
+function shootForTheWin(input) {
+    let myTargets = input.shift().split(` `).map(Number);
+    let countShots = 0;
+    let line;
+
+    while ((line = input.shift()) !== "End") {
+        line = Number(line);
+        if (line < myTargets.length) {
+            countShots++;
+            let curTarget = myTargets[line];
+            myTargets[line] = -1;
+            for (let a = 0; a < myTargets.length; a++) {
+                if (myTargets[a] > 0) {
+                    if (myTargets[a] > curTarget) {
+                        myTargets[a] -= curTarget;
+                    } else if (myTargets[a] <= curTarget) {
+                        myTargets[a] += curTarget;
+                    }
+                }
+            }
+        }
+    }
+    console.log(`Shot targets: ${countShots} -> ${myTargets.join(` `)}`);
+}
